@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from "react-native";
 const Texto = ({ txt = "DefaultText", style }) => {
   const [content, setContent] = useState(txt);
   const updateText = () => {
-    setContent("Bye world");
+    let reverse = content.split("").reverse().join("")
+    setContent(reverse);
   };
+  
   return (
     <Text style={[styles.customText, style]} onPress={updateText}>
       {content}
@@ -16,8 +18,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Texto style={styles.yellow}></Texto>
-      <Texto style={styles.green}></Texto>
-      <Texto style={styles.blue}></Texto>
     </View>
   );
 }
@@ -25,25 +25,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: "row",
     backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "space-evenly"
-  },
-  customText: {
-    fontSize: 14,
-    color: "red",
-    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center"
   },
   yellow: {
     backgroundColor: "yellow",
-  },
-  green: {
-    backgroundColor: "green",
-    color: "white",
-  },
-  blue: {
-    backgroundColor: "blue",
-    color: "white",
-  },
+    color: "red",
+    fontSize: 24
+  }
 });
