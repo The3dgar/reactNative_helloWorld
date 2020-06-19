@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-const Texto = ({ content, children }) => (
-  <Text>{content ? content : children}</Text>
-);
+const Texto = ({ txt = "DefaultText", style }) => {
+  const [content, setContent] = useState(txt);
+  const updateText = () => {
+    setContent("Bye world");
+  };
+  return (
+    <Text style={[styles.customText, style]} onPress={updateText}>
+      {content}
+    </Text>
+  );
+};
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <h1>words from h1 tag</h1>
-      <Texto content={"NOT the children"}>The children</Texto>
-      <Texto content={"Hello World"}></Texto>
-      <Texto content={"Bye World"}></Texto>
+      <Texto style={styles.yellow}></Texto>
+      <Texto style={styles.green}></Texto>
+      <Texto style={styles.blue}></Texto>
     </View>
   );
 }
@@ -18,8 +25,25 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexDirection: "row",
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
+    justifyContent: "space-evenly"
+  },
+  customText: {
+    fontSize: 14,
+    color: "red",
+    backgroundColor: "red",
+  },
+  yellow: {
+    backgroundColor: "yellow",
+  },
+  green: {
+    backgroundColor: "green",
+    color: "white",
+  },
+  blue: {
+    backgroundColor: "blue",
+    color: "white",
   },
 });
