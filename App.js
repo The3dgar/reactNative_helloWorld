@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   TouchableNativeFeedback,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 // TouchableHighlight: only works in andrid
 // TouchableNativeFeedback: only works in android
@@ -26,32 +27,92 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Texto: {submit}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Texto por defecto"
-        onChangeText={(t) => setText(t)}
-        defaultValue={text}
-      ></TextInput>
-      {/* <Button onPress={myActionOne} title="Aceptar" /> */}
-      <TouchableOpacity style={styles.TouchableOpacity} onPress={myActionOne}>
-        <View style={styles.view}>
-          <Text>AceptarTc</Text>
-        </View>
-      </TouchableOpacity>
+      <ScrollView style={styles.scrollView}>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <Text>Texto: {submit}</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Texto por defecto"
+          onChangeText={(t) => setText(t)}
+          defaultValue={text}
+        ></TextInput>
+        {/* <Button onPress={myActionOne} title="Aceptar" /> */}
+        <TouchableOpacity style={styles.TouchableOpacity} onPress={myActionOne}>
+          <View style={styles.view}>
+            <Text>AceptarTc</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  TouchableOpacity:{
-    backgroundColor:"#eee"
+  TouchableOpacity: {
+    backgroundColor: "#eee",
   },
   view: {
     height: 40,
     width: 300,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   container: {
     flex: 1,
@@ -59,15 +120,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  yellow: {
-    backgroundColor: "yellow",
-    color: "red",
-    fontSize: 24,
-  },
   input: {
     height: 40,
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
     width: "100%",
   },
+  scrollView: {
+    width: Dimensions.get("window").width
+  }
 });
