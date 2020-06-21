@@ -1,132 +1,53 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Dimensions,
-  Button,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-// TouchableHighlight: only works in andrid
-// TouchableNativeFeedback: only works in android
-
-const { width, height } = Dimensions.get("window");
-
+import { StyleSheet, Text, View, FlatList, Platform,StatusBar, SectionList} from "react-native";
+import { render } from "react-dom";
+const data = [
+  { key: "1", name: "Edgar" },
+  { key: "2", name: "Perro" },
+  { key: "3", name: "Gato" },
+  { key: "4", name: "Loro" },
+  { key: "5", name: "Tortuga" },
+  { key: "6", name: "Edgar" },
+  { key: "7", name: "Perro" },
+  { key: "8", name: "Gato" },
+  { key: "9", name: "Loro" },
+  { key: "10", name: "Tortuga" },
+  { key: "11", name: "Edgar" },
+  { key: "12", name: "Perro" },
+  { key: "13", name: "Gato" },
+  { key: "14", name: "Loro" },
+  { key: "15", name: "Tortuga" },
+  { key: "16", name: "Edgar" },
+  { key: "17", name: "Perro" },
+  { key: "18", name: "Gato" },
+  { key: "19", name: "Loro" },
+  { key: "20", name: "Tortuga" },
+]
 export default function App() {
-  const [text, setText] = useState("Initial value");
-  const [submit, setSubmit] = useState("");
-
-  const myActionOne = () => {
-    setSubmit(text);
-    alert("Texto enviado con exito");
-  };
-
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <Text>Texto: {submit}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Texto por defecto"
-          onChangeText={(t) => setText(t)}
-          defaultValue={text}
-        ></TextInput>
-        {/* <Button onPress={myActionOne} title="Aceptar" /> */}
-        <TouchableOpacity style={styles.TouchableOpacity} onPress={myActionOne}>
-          <View style={styles.view}>
-            <Text>AceptarTc</Text>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+      ></FlatList>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  TouchableOpacity: {
-    backgroundColor: "#eee",
-  },
-  view: {
-    height: 40,
-    width: 300,
-    alignItems: "center",
-    justifyContent: "center",
+  item:{
+    padding:10,
+    fontSize:22,
+    height:50,
+    borderBottomColor:"#ccc",
+    borderBottomWidth: 1,
+    width: "100%"
   },
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
-  input: {
-    height: 40,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-    width: "100%",
-  },
-  scrollView: {
-    width: Dimensions.get("window").width
-  }
 });
