@@ -1,66 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Platform,
   StatusBar,
-  SectionList,
+  FlatList,
 } from "react-native";
 import { render } from "react-dom";
 
 export default function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // un efecto es una data que no conocemos su magnitud
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <Text>loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={[
-          {
-            title: "Grupo 1",
-            data: [
-              { key: "1", name: "Leon" },
-              { key: "2", name: "Perro" },
-              { key: "3", name: "Gato" },
-              { key: "4", name: "Loro" },
-              { key: "5", name: "Tortuga" },
-            ],
-          },
-          {
-            title: "Grupo 2",
-            data: [
-              { key: "6", name: "Leon" },
-              { key: "7", name: "Perro" },
-              { key: "8", name: "Gato" },
-              { key: "9", name: "Loro" },
-              { key: "10", name: "Tortuga" },
-            ],
-          },
-          {
-            title: "Grupo 3",
-            data: [
-              { key: "10", name: "Tortuga" },
-              { key: "11", name: "Edgar" },
-              { key: "12", name: "Perro" },
-              { key: "13", name: "Gato" },
-              { key: "14", name: "Loro" },
-              { key: "15", name: "Tortuga" },
-            ],
-          },
-        ]}
+      <FlatList
+        data={users}
         renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
-        renderSectionHeader={({ section }) => <Text style={styles.section}>{section.title}</Text>}
-      ></SectionList>
+        keyExtractor={(item) => String(item.id)}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  section:{
-    fontSize:16,
-    fontWeight: "bold",
-    backgroundColor: "blue",
-    paddingLeft: 10,
-    color: "white"
-    
+  center: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   item: {
     padding: 10,
