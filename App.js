@@ -1,39 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
-  ActivityIndicator,
   Text,
   View,
   Platform,
   StatusBar,
-  Image,
-  ImageBackground,
+  Modal,
+  Button,
 } from "react-native";
 
 export default function App() {
+  const [modal, setModal] = useState(false);
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#00f"></ActivityIndicator>
-      <ImageBackground
-        style={styles.photo}
-        // source={require("./assets/icon.png")}
-        source={{ uri: "https://placekitten.com/200/200" }}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modal}
+        onRequestClose={() => {
+          // some code
+        }}
       >
-        <Text>Hola mundo</Text>
-      </ImageBackground>
+        <View style={styles.center}>
+          <View style={styles.content}>
+            <Text>Soy un modal</Text>
+            <Button
+              title="Cerrar modal"
+              onPress={() => setModal(!modal)}
+            ></Button>
+          </View>
+        </View>
+      </Modal>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Text>No soy del Modal</Text>
+      <Button title="Abrir Modal" onPress={() => setModal(!modal)}></Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  photo: {
-    height: 200,
-    width: 200,
+  content: {
+    flex: 1,
+    backgroundColor:"#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 25,
+    borderRadius: 5
+  },
+  center: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.3)"
   },
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
