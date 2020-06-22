@@ -1,33 +1,23 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  StatusBar,
-  Modal,
-  Button,
-  Alert,
-} from "react-native";
-const crearDialogo = () => {
-  Alert.alert(
-    "Titulo del alert",
-    "subtitulo del alert o mensaje contenido en el alert",
-    [
-      { text: "Cancelar", onPress: () => {}, style: "cancel" },
-      {
-        text: "Aceptar",
-        onPress: () => console.log("button press"),
-      },
-    ],
-    {cancelable: false}
-  );
-};
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
+import * as Location from "expo-location";
+
 export default function App() {
-  const [modal, setModal] = useState(false);
+  const buscaLocation = async () => {
+    const { status } = await Location.requestPermissionsAsync();
+    if(status !== "granted") {
+      return alert("No tenemos permisos")
+    }
+
+    const location = await Location.getCurrentPositionAsync({})
+    console.log(location);
+  };
+  useEffect(() => {
+    buscaLocation();
+  });
   return (
     <View style={styles.container}>
-      <Button title="Abrir alert" onPress={crearDialogo}></Button>
+      <Text>Hola mundo</Text>
     </View>
   );
 }
