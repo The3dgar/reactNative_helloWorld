@@ -5,59 +5,54 @@ import {
   View,
   Platform,
   StatusBar,
+  Button,
   Dimensions,
 } from "react-native";
-import * as Location from "expo-location";
-import MapView, { Marker } from "react-native-maps";
+import { Camera } from "expo-camera";
 
 export default function App() {
-  const [locacion, setLocacion] = useState({});
+  const [permissions, setPermissions] = useState(null);
+  const [camType, setCamType] = useState(Camera.Constants.Type.front);
 
-  const buscaLocation = async () => {
-    const { status } = await Location.requestPermissionsAsync();
+  const getPermissions = async () => {
+    const { status } = await Camera.requestPermissionsAsync();
     if (status !== "granted") {
-      return alert("No tenemos permisos");
+      return alert("Please allows to access all functions");
     }
-
-    const location = await Location.getCurrentPositionAsync({});
-    setLocacion(location);
+    setPermissions(status === "granted");
   };
   useEffect(() => {
-    buscaLocation();
+    getPermissions();
   });
+
+  if (permissions === null)
+    <View>
+      <Text>Waiting for allows</Text>
+    </View>;
+  if (permissions === false)
+    <View>
+      <Text>No permissions to access the Camera</Text>
+    </View>;
   return (
     <View style={styles.container}>
-      <MapView style={styles.map}>
-        {locacion.coords ? (
-          <Marker
-            coordinate={locacion.coords}
-            title="Casita"
-            description="Casita de julianny"
-          ></Marker>
-        ) : null}
-      </MapView>
+      <Camera style={styles.camera} type={camType}>
+        <Button
+          onPress={() => {
+            const { front, back } = Camera.Constants.Type;
+            setCamType(camType === front ? back : front);
+          }}
+          title="Change"
+        ></Button>
+      </Camera>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  map: {
+  camera: {
+    // flex: 1,
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
-  content: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 25,
-    borderRadius: 5,
-  },
-  center: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.3)",
+    height: Dimensions.get("window").height * 0.8,
   },
   container: {
     flex: 1,
